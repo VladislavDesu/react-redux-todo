@@ -6,9 +6,11 @@ const ToDoList = () => {
 
    return (
       <ul>
-         {list.map((item) => (
-            <ToDoItem key={item.id} value={item.value} />
-         ))}
+         {list.length === 0 ? (
+            <li>Ничего не найдено</li>
+         ) : (
+            list.map((item) => <ToDoItem key={item.id} item={item} />)
+         )}
       </ul>
    );
 };

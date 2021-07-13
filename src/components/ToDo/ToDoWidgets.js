@@ -16,13 +16,19 @@ const removeListItemAction = "todo/removeListItem";
 
 // Reducer
 const todoReducer = (state = initialState, action) => {
-   const { type, value } = action;
+   const { type, value, id } = action;
 
    switch (type) {
       case searchValueAction:
+         const lowercasedFilter = value.toLowerCase();
+         const filteredData = state.list.filter((item) =>
+            item.value.toLowerCase().includes(lowercasedFilter)
+         );
+
          return {
             ...state,
             searchValue: value,
+            list: filteredData,
          };
       case addingValueAction:
          return {
@@ -32,12 +38,12 @@ const todoReducer = (state = initialState, action) => {
       case addListItemAction:
          return {
             ...state,
-            list: [...state.list, { id: state.list.length + 1, value: value }],
+            list: [...state.list, { id: state.list.length + 1, value }],
          };
       case removeListItemAction:
          return {
             ...state,
-            list: [],
+            list: state.list.filter((item) => item.id !== id),
          };
       default:
          return state;
@@ -59,8 +65,8 @@ const addListItem = (value) => {
    return { type: addListItemAction, value };
 };
 
-const removeListItem = () => {
-   return { type: removeListItemAction };
+const removeListItem = (id) => {
+   return { type: removeListItemAction, id };
 };
 
 export default todoReducer;
