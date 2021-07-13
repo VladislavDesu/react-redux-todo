@@ -3,13 +3,19 @@ import ToDoItem from "./ToDoItem";
 
 const ToDoList = () => {
    const list = useSelector((state) => state.todoReducer.list);
+   const searchValue = useSelector((state) => state.todoReducer.searchValue);
+
+   const lowercasedFilter = searchValue.toLowerCase();
+   const filteredData = list.filter((item) =>
+      item.value.toLowerCase().includes(lowercasedFilter)
+   );
 
    return (
       <ul>
-         {list.length === 0 ? (
+         {filteredData.length === 0 ? (
             <li>Ничего не найдено</li>
          ) : (
-            list.map((item) => <ToDoItem key={item.id} item={item} />)
+            filteredData.map((item) => <ToDoItem key={item.id} item={item} />)
          )}
       </ul>
    );

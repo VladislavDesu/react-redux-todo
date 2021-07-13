@@ -20,15 +20,9 @@ const todoReducer = (state = initialState, action) => {
 
    switch (type) {
       case searchValueAction:
-         const lowercasedFilter = value.toLowerCase();
-         const filteredData = state.list.filter((item) =>
-            item.value.toLowerCase().includes(lowercasedFilter)
-         );
-
          return {
             ...state,
             searchValue: value,
-            list: filteredData,
          };
       case addingValueAction:
          return {
