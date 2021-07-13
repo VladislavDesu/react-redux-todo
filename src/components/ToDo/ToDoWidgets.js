@@ -32,7 +32,13 @@ const todoReducer = (state = initialState, action) => {
       case addListItemAction:
          return {
             ...state,
-            list: [...state.list, { id: state.list.length + 1, value }],
+            list: [
+               ...state.list,
+               {
+                  id: state.list.length + 1,
+                  value: value === "" ? "Пусто" : value,
+               },
+            ],
          };
       case removeListItemAction:
          return {

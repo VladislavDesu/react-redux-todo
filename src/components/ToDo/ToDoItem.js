@@ -12,7 +12,7 @@ const ToDoItem = (props) => {
 
    return (
       <li>
-         {value ? value : "Пусто"}
+         {value}
          <button onClick={handleClick}>remove</button>
       </li>
    );
